@@ -1,4 +1,4 @@
-package pt.com.hospital.DTO.response;
+package pt.com.hospital.application.DTO.response;
 
 import pt.com.hospital.domain.entity.Medico;
 import pt.com.hospital.domain.entity.Paciente;

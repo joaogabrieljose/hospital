@@ -1,11 +1,11 @@
-package pt.com.hospital.DTO.request;
+package pt.com.hospital.application.DTO.response;
 
 import pt.com.hospital.domain.entity.Consulta;
 
 import java.util.Date;
 import java.util.List;
 
-public class MedicoRequest {
+public class MedicoResponse {
     public long id;
     public String name;
     public String especialidade;
@@ -15,9 +15,9 @@ public class MedicoRequest {
     public Date dataCadastro;
     public List<Consulta> consulta;
 
-    public MedicoRequest(){}
+    public MedicoResponse(){}
 
-    public MedicoRequest(long id, String name, String especialidade, String telefone, String email, String
+    public MedicoResponse(long id, String name, String especialidade, String telefone, String email, String
             endereco, Date dataCadastro, List<Consulta> consulta) {
         this.id = id;
         this.name = name;

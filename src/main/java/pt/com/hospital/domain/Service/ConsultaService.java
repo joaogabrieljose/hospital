@@ -11,6 +11,7 @@ import pt.com.hospital.domain.repository.PacienteRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ConsultaService {
@@ -25,19 +26,17 @@ public class ConsultaService {
     private PacienteRepository pacienteRepository;
 
     // agendar consulta
-    public Consulta agendaConsulta(long medicoId, long pacienteId, LocalDateTime dataHora, String motivo){
-        Paciente paciente = pacienteRepository.findPacienteById(pacienteId)
-                .orElseThrow(()-> new RuntimeException("paciente não encontrado"));
-        Medico medico = medicoRepository.findMedicoById(medicoId)
-                .orElseThrow(()-> new RuntimeException("medio não encontrado"));
-        Consulta consulta = new Consulta();
+    public Consulta agendaConsulta(Consulta consulta) {
+        Paciente paciente = pacienteRepository.findPacienteById(consulta.getPaciente().getId())
+                .orElseThrow(() -> new NoSuchElementException("Paciente não encontrado"));
+        Medico medico = medicoRepository.findMedicoById(consulta.getMedico().getId())
+                .orElseThrow(() -> new NoSuchElementException("Médico não encontrado"));
+
         consulta.setPaciente(paciente);
         consulta.setMedico(medico);
-        consulta.setDataHora(dataHora);
-        consulta.setMotivoConsulta(motivo);
-        consulta.setStatus("Agendar");
+        consulta.setStatus("Agendada");
         consulta.setDataCadastro(LocalDateTime.now());
-        return  consultaRepository.save(consulta);
+        return consultaRepository.save(consulta);
     }
 
     public List<Consulta> findAll(){

@@ -1,7 +1,7 @@
-package pt.com.hospital.DTO.mapper;
+package pt.com.hospital.application.DTO.mapper;
 
-import pt.com.hospital.DTO.request.ConsultaRequest;
-import pt.com.hospital.DTO.response.ConsultaResponse;
+import pt.com.hospital.application.DTO.request.ConsultaRequest;
+import pt.com.hospital.application.DTO.response.ConsultaResponse;
 import pt.com.hospital.domain.entity.Consulta;
 
 public class ConsultaMapper {
@@ -20,7 +20,7 @@ public class ConsultaMapper {
         return  consulta;
     }
 
-    public ConsultaResponse toConsultaResponse(Consulta consulta){
+    public static ConsultaResponse toConsultaResponse(Consulta consulta){
         ConsultaResponse consultaResponse = new ConsultaResponse();
         if(consulta.getId() != null){
             consultaResponse.setId(consulta.getId());

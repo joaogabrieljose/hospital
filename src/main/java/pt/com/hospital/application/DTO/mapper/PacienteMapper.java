@@ -1,7 +1,7 @@
-package pt.com.hospital.DTO.mapper;
+package pt.com.hospital.application.DTO.mapper;
 
-import pt.com.hospital.DTO.request.PacienteRequest;
-import pt.com.hospital.DTO.response.PacienteResponse;
+import pt.com.hospital.application.DTO.request.PacienteRequest;
+import pt.com.hospital.application.DTO.response.PacienteResponse;
 import pt.com.hospital.domain.entity.Paciente;
 
 public class PacienteMapper {

@@ -1,7 +1,7 @@
-package pt.com.hospital.DTO.mapper;
+package pt.com.hospital.application.DTO.mapper;
 
-import pt.com.hospital.DTO.request.MedicoRequest;
-import pt.com.hospital.DTO.response.MedicoResponse;
+import pt.com.hospital.application.DTO.request.MedicoRequest;
+import pt.com.hospital.application.DTO.response.MedicoResponse;
 import pt.com.hospital.domain.entity.Medico;
 
 public class MedicoMapper {
@@ -23,6 +23,7 @@ public class MedicoMapper {
     public static MedicoResponse toMedicoResponse(Medico medico){
 
         MedicoResponse medicoResponse = new MedicoResponse();
+
         medicoResponse.setId(medico.getId());
         medicoResponse.setName(medico.getName());
         medicoResponse.setEmail(medico.getEmail());
