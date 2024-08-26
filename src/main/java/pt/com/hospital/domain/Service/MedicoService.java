@@ -14,7 +14,6 @@ public class MedicoService {
     @Autowired
     private MedicoRepository repository;
 
-
     //cria medico
     public Medico create (Medico medico){
         return repository.save(medico);
