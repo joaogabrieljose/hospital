@@ -32,14 +32,21 @@ public class ConsultaController {
         List<ConsultaResponse> responseList = crateLista.stream().map(ConsultaMapper:: toConsultaResponse).toList();
         return  ResponseEntity.ok(responseList);
     }
-
+/*
     @PutMapping("/consulta/{id}")
-    public ResponseEntity<ConsultaResponse> updateConsulta(@PathVariable long id, ConsultaRequest request){
-        var createUpdate = ConsultaMapper.toConsulta(request);
-        var newUpdate = service.updateStatusConsulta(id);
-        var response = ConsultaMapper.toConsultaResponse(newUpdate);
+    public ResponseEntity<ConsultaResponse> updateConsulta(
+            @PathVariable long id, @RequestBody ConsultaRequest request) {
+
+        Consulta consultaExistente = service.updateConsulta(id)
+                .orElseThrow(() -> new NoSuchElementException("Consulta não encontrada com id: " + id));
+
+        consultaExistente.setDataHora(request.getDataHora());
+        consultaExistente.setMotivoConsulta(request.getMotivoConsulta());
+        consultaExistente.setStatus(request.getStatus());
+        Consulta consultaAtualizada = service.updateConsulta(consultaExistente);
+        ConsultaResponse response = ConsultaMapper.toConsultaResponse(consultaAtualizada);
         return ResponseEntity.ok(response);
-    }
+    }*/
 
     @DeleteMapping("/consulta/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable long id){

@@ -28,8 +28,8 @@ public class PacienteService {
     public Paciente getPacienteById(long id){
         return repository.findPacienteById(id).orElseThrow(()-> new RuntimeException("paciente não encontrado"));
     }
-    // atualizar por id
 
+    // atualizar por id
     public Paciente updateById(long id, Paciente paciente){
         Optional<Paciente> update = repository.findPacienteById(id);
         if(update.isPresent()){

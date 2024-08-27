@@ -43,12 +43,18 @@ public class ConsultaService {
         return (List<Consulta>) consultaRepository.findAll();
     }
 
-    // atualizarStatusConsulta
-    public Consulta updateStatusConsulta(long id, String status){
+    // Método no serviço para atualizar a consulta
+    public Consulta updateConsulta(Consulta consulta) {
+        return consultaRepository.save(consulta);
+    }
+
+    // Método para atualizar apenas o status da consulta
+    public Consulta updateStatusConsulta(long id, String status) {
         Consulta consulta = consultaRepository.findConsultaById(id)
-                .orElseThrow(()-> new RuntimeException("consulta não encontrada"));
+                .orElseThrow(() -> new NoSuchElementException("Consulta não encontrada com id: " + id));
+
         consulta.setStatus(status);
-        return  consultaRepository.save(consulta);
+        return consultaRepository.save(consulta);
     }
 
     // cancela consulta
