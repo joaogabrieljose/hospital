@@ -6,22 +6,19 @@ import pt.com.hospital.domain.entity.Medico;
 
 public class MedicoMapper {
 
-    public static Medico toMedico(MedicoRequest request){
+    public static Medico toMedico(MedicoRequest request) {
         Medico medico = new Medico();
         medico.setId(request.getId());
         medico.setName(request.getName());
+        medico.setEspecialidade(request.getEspecialidade());
+        medico.setTelefone(request.getTelefone());
         medico.setEmail(request.getEmail());
         medico.setEndereco(request.getEndereco());
-        medico.setTelefone(request.getTelefone());
-        medico.setEspecialidade(request.getEspecialidade());
-        medico.setConsulta(request.getConsulta());
         medico.setDataCadastro(request.getDataCadastro());
-
         return medico;
     }
 
     public static MedicoResponse toMedicoResponse(Medico medico){
-
         MedicoResponse medicoResponse = new MedicoResponse();
 
         medicoResponse.setId(medico.getId());

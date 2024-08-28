@@ -1,6 +1,7 @@
 package pt.com.hospital.api.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.com.hospital.application.DTO.mapper.MedicoMapper;
@@ -22,7 +23,7 @@ public class MedicoController {
         var create = MedicoMapper.toMedico(request);
         var newCreate = service.create(create);
         MedicoResponse novo = MedicoMapper.toMedicoResponse(newCreate);
-        return  ResponseEntity.ok(novo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novo);
     }
     @GetMapping("/medico/{id}")
     public ResponseEntity<MedicoResponse> getMedicoById(@PathVariable long id, MedicoRequest request){
@@ -40,20 +41,17 @@ public class MedicoController {
     }
 
     @PutMapping("/medico/{id}")
-    public ResponseEntity<MedicoResponse> updateMedico(@PathVariable long id, MedicoRequest request){
+    public ResponseEntity<MedicoResponse> updateMedico(@PathVariable long id, @RequestBody MedicoRequest request){
         var update = MedicoMapper.toMedico(request);
         var newUpdate = service.update(id,update);
         MedicoResponse novo = MedicoMapper.toMedicoResponse(newUpdate);
-        return  ResponseEntity.ok(novo);
+        return new ResponseEntity<>(novo, HttpStatus.OK);
     }
 
-    @DeleteMapping("/medio/{id}")
-    public ResponseEntity<MedicoResponse> deleteById(@PathVariable long id){
-        service.deleteById(id);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/medico/{id}")
+    public ResponseEntity<Void> deleteMedicoById(@PathVariable long id){
+        service.deleteMedicoById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
 
 }

@@ -1,6 +1,7 @@
 package pt.com.hospital.api.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.com.hospital.application.DTO.mapper.PacienteMapper;
@@ -42,11 +43,11 @@ public class PacienteController {
     }
 
     @PutMapping("/paciente/{id}")
-    public ResponseEntity<PacienteResponse> updatePacienteById(@PathVariable long id, PacienteRequest request){
+    public ResponseEntity<PacienteResponse> update(@PathVariable long id,@RequestBody PacienteRequest request){
         var update = PacienteMapper.toPaciente(request);
         var newUpadte = service.updateById(id, update);
         PacienteResponse updatePaciente = PacienteMapper.toPacienteResponse(newUpadte);
-        return  ResponseEntity.ok(updatePaciente);
+        return new ResponseEntity<>(updatePaciente, HttpStatus.OK);
     }
 
     @DeleteMapping("/paciente/{id}")
