@@ -26,27 +26,20 @@ public class ConsultaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("/consulta") // lista todas as consultas
+    @GetMapping("/consulta/") // lista todas as consultas
     public ResponseEntity<List<ConsultaResponse>> findAll(){
         List<Consulta> crateLista = service.findAll();
         List<ConsultaResponse> responseList = crateLista.stream().map(ConsultaMapper:: toConsultaResponse).toList();
         return  ResponseEntity.ok(responseList);
     }
-/*
+
     @PutMapping("/consulta/{id}")
-    public ResponseEntity<ConsultaResponse> updateConsulta(
-            @PathVariable long id, @RequestBody ConsultaRequest request) {
-
-        Consulta consultaExistente = service.updateConsulta(id)
-                .orElseThrow(() -> new NoSuchElementException("Consulta não encontrada com id: " + id));
-
-        consultaExistente.setDataHora(request.getDataHora());
-        consultaExistente.setMotivoConsulta(request.getMotivoConsulta());
-        consultaExistente.setStatus(request.getStatus());
-        Consulta consultaAtualizada = service.updateConsulta(consultaExistente);
-        ConsultaResponse response = ConsultaMapper.toConsultaResponse(consultaAtualizada);
-        return ResponseEntity.ok(response);
-    }*/
+    public ResponseEntity<ConsultaResponse> updateStatusConsulta(@PathVariable long id, @RequestBody ConsultaRequest request) {
+        var updateConsulta = ConsultaMapper.toConsulta(request);
+        var nova = service.updateConsulta(id,updateConsulta);
+        ConsultaResponse atualizar = ConsultaMapper.toConsultaResponse(nova);
+        return new ResponseEntity<>(atualizar, HttpStatus.OK);
+    }
 
     @DeleteMapping("/consulta/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable long id){

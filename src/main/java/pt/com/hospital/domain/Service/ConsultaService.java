@@ -2,6 +2,7 @@ package pt.com.hospital.domain.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 import pt.com.hospital.domain.entity.Consulta;
 import pt.com.hospital.domain.entity.Medico;
 import pt.com.hospital.domain.entity.Paciente;
@@ -43,18 +44,19 @@ public class ConsultaService {
         return (List<Consulta>) consultaRepository.findAll();
     }
 
-    // Método no serviço para atualizar a consulta
-    public Consulta updateConsulta(Consulta consulta) {
-        return consultaRepository.save(consulta);
-    }
 
-    // Método para atualizar apenas o status da consulta
-    public Consulta updateStatusConsulta(long id, String status) {
-        Consulta consulta = consultaRepository.findConsultaById(id)
+    @PutMapping("/consulta/{id}")
+    public Consulta updateConsulta(long id, Consulta consulta) {
+        Consulta consultaExistente = consultaRepository.findConsultaById(id)
                 .orElseThrow(() -> new NoSuchElementException("Consulta não encontrada com id: " + id));
 
-        consulta.setStatus(status);
-        return consultaRepository.save(consulta);
+        consultaExistente.setMedico(consulta.getMedico());
+        consultaExistente.setPaciente(consulta.getPaciente());
+        consultaExistente.setDataHora(consulta.getDataHora());
+        consultaExistente.setMotivoConsulta(consulta.getMotivoConsulta());
+        consultaExistente.setStatus(consulta.getStatus());
+
+        return consultaRepository.save(consultaExistente);
     }
 
     // cancela consulta
