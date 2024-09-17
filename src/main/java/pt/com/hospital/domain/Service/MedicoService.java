@@ -16,6 +16,7 @@ public class MedicoService {
 
     //cria medico
     public Medico create (Medico medico){
+
         return repository.save(medico);
     }
 

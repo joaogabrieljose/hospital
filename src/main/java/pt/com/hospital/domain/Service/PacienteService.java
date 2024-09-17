@@ -10,6 +10,7 @@ import pt.com.hospital.domain.entity.Paciente;
 import pt.com.hospital.domain.repository.PacienteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacienteService {
@@ -33,13 +34,15 @@ public class PacienteService {
     }
 
     // salva paciente por id
-    public Paciente getPacienteById(long id) {
-        return repository.findPacienteById(id).orElseThrow(() -> new RuntimeException("paciente não encontrado"));
+    public PacienteResponse getPacienteById(long id) {
+        Optional<Paciente> paciente = repository.findPacienteById(id);
+        Paciente get = paciente.orElseThrow(()-> new EntityNotFoundException("paciente não existe"));
+        return PacienteMapper.toPacienteResponse(get);
     }
 
     // atualizar por id
-    public Paciente updateById(long id, Paciente paciente) {
-        // Optional<Paciente> update = repository.findPacienteById(id);
+    public PacienteResponse updateById(long id, PacienteRequest paciente) {
+        Optional<Paciente> update = repository.findPacienteById(id);
         Paciente novo = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("paciente não encontrado com id: " + id));
         novo.setName(paciente.getName());
@@ -48,14 +51,18 @@ public class PacienteService {
         novo.setTelefone(paciente.getTelefone());
         novo.setDataNascimento(paciente.getDataNascimento());
         novo.setDataCadastro(paciente.getDataCadastro());
-        return repository.save(novo);
+
+        Paciente atualizado = repository.save(novo);
+        return PacienteMapper.toPacienteResponse(atualizado);
     }
 
     //delete
-    public void deleteById(long id) {
-        Paciente paciente = getPacienteById(id);
-        repository.delete(paciente);
+    public boolean deleteById(long id) {
+       Optional<Paciente> paciente = repository.findPacienteById(id);
+       if (paciente.isPresent()){
+           repository.deleteById(id);
+           return true;
+       }
+       return  false;
     }
-
-
 }
