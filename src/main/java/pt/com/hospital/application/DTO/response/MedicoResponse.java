@@ -1,9 +1,6 @@
 package pt.com.hospital.application.DTO.response;
 
-import pt.com.hospital.domain.entity.Consulta;
-
 import java.util.Date;
-import java.util.List;
 
 public class MedicoResponse {
     public long id;
@@ -13,12 +10,12 @@ public class MedicoResponse {
     public String email;
     public String endereco;
     public Date dataCadastro;
-    public List<Consulta> consulta;
+    public long consultaId;
 
     public MedicoResponse(){}
 
     public MedicoResponse(long id, String name, String especialidade, String telefone, String email, String
-            endereco, Date dataCadastro, List<Consulta> consulta) {
+            endereco, Date dataCadastro, long consulta) {
         this.id = id;
         this.name = name;
         this.especialidade = especialidade;
@@ -26,7 +23,7 @@ public class MedicoResponse {
         this.email = email;
         this.endereco = endereco;
         this.dataCadastro = dataCadastro;
-        this.consulta = consulta;
+        this.consultaId = consulta;
     }
 
     public long getId() {
@@ -85,11 +82,11 @@ public class MedicoResponse {
         this.dataCadastro = dataCadastro;
     }
 
-    public List<Consulta> getConsulta() {
-        return consulta;
+    public long getConsultaId() {
+        return consultaId;
     }
 
-    public void setConsulta(List<Consulta> consulta) {
-        this.consulta = consulta;
+    public void setConsultaId(long consultaId) {
+        this.consultaId = consultaId;
     }
 }

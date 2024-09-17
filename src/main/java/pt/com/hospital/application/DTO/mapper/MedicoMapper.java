@@ -8,7 +8,6 @@ public class MedicoMapper {
 
     public static Medico toMedico(MedicoRequest request) {
         Medico medico = new Medico();
-        medico.setId(request.getId());
         medico.setName(request.getName());
         medico.setEspecialidade(request.getEspecialidade());
         medico.setTelefone(request.getTelefone());
@@ -27,7 +26,6 @@ public class MedicoMapper {
         medicoResponse.setEndereco(medico.getEndereco());
         medicoResponse.setTelefone(medico.getTelefone());
         medicoResponse.setEspecialidade(medico.getEspecialidade());
-        medicoResponse.setConsulta(medico.getConsulta());
         medicoResponse.setDataCadastro(medico.getDataCadastro());
         return  medicoResponse;
     }

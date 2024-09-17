@@ -1,54 +1,36 @@
 package pt.com.hospital.application.DTO.request;
 
-import pt.com.hospital.domain.entity.Medico;
-import pt.com.hospital.domain.entity.Paciente;
-
 import java.time.LocalDateTime;
 
 public class ConsultaRequest {
-    public Long id;
-    public Paciente paciente;
-    public Medico medico;
+    public long pacienteId ;
+    public long medicoId;
     public LocalDateTime dataHora;
-    public String motivoConsulta;
-    public String status;
     public LocalDateTime dataCadastro;
 
     public ConsultaRequest(){}
 
-    public ConsultaRequest(Long id, Paciente paciente, Medico medico, LocalDateTime dataHora,
-                           String motivoConsulta, String status, LocalDateTime dataCadastro) {
-        this.id = id;
-        this.paciente = paciente;
-        this.medico = medico;
+    public ConsultaRequest(long pacienteId, long medicoId, LocalDateTime dataHora, LocalDateTime dataCadastro) {
+        this.pacienteId = pacienteId;
+        this.medicoId = medicoId;
         this.dataHora = dataHora;
-        this.motivoConsulta = motivoConsulta;
-        this.status = status;
         this.dataCadastro = dataCadastro;
     }
 
-    public Long getId() {
-        return id;
+    public long getPacienteId() {
+        return pacienteId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPacienteId(long pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public long getMedicoId() {
+        return medicoId;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setMedicoId(long medicoId) {
+        this.medicoId = medicoId;
     }
 
     public LocalDateTime getDataHora() {
@@ -57,22 +39,6 @@ public class ConsultaRequest {
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public String getMotivoConsulta() {
-        return motivoConsulta;
-    }
-
-    public void setMotivoConsulta(String motivoConsulta) {
-        this.motivoConsulta = motivoConsulta;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public LocalDateTime getDataCadastro() {

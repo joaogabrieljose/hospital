@@ -8,7 +8,6 @@ import pt.com.hospital.application.DTO.mapper.PacienteMapper;
 import pt.com.hospital.application.DTO.request.PacienteRequest;
 import pt.com.hospital.application.DTO.response.PacienteResponse;
 import pt.com.hospital.domain.Service.PacienteService;
-import pt.com.hospital.domain.entity.Paciente;
 
 import java.util.List;
 
@@ -20,18 +19,14 @@ public class PacienteController {
 
     @PostMapping("/paciente/")
     public ResponseEntity<PacienteResponse> save(@RequestBody PacienteRequest request){
-        var create = PacienteMapper.toPaciente(request);
-        var novoCreatos = service.createPaciente(create);
-        var response = PacienteMapper.toPacienteResponse(novoCreatos);
-        return ResponseEntity.ok(response);
+        var create = service.createPaciente(request);
+        return ResponseEntity.ok(create);
     }
 
     @GetMapping("/paciente/")
     public  ResponseEntity<List<PacienteResponse>> findAll(){
-        List<Paciente> listPaciente = service.findAll();
-        List<PacienteResponse> novo = listPaciente.stream()
-                .map(PacienteMapper:: toPacienteResponse).toList();
-        return  ResponseEntity.ok(novo);
+       var findPaciente = service.findAll();
+        return  ResponseEntity.ok(findPaciente);
     }
 
     @GetMapping("/paciente/{id}")

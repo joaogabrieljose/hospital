@@ -1,41 +1,29 @@
 package pt.com.hospital.application.DTO.request;
 
-import pt.com.hospital.domain.entity.Consulta;
-
 import java.util.Date;
-import java.util.List;
 
 public class PacienteRequest {
-    public long id;
     public String name;
     public Date dataNascimento;
     public  String sexo;
     public String telefone;
     public String email;
     public Date dataCadastro;
-    public List<Consulta> consulta;
+    public long consultaId;
 
     public PacienteRequest(){}
 
     public PacienteRequest(long id, String name, Date dataNascimento, String sexo, String telefone,
-                           String email, Date dataCadastro, List<Consulta> consulta) {
-        this.id = id;
+                           String email, Date dataCadastro, long consulta) {
         this.name = name;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.telefone = telefone;
         this.email = email;
         this.dataCadastro = dataCadastro;
-        this.consulta = consulta;
+        this.consultaId = consulta;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -85,11 +73,11 @@ public class PacienteRequest {
         this.dataCadastro = dataCadastro;
     }
 
-    public List<Consulta> getConsulta() {
-        return consulta;
+    public long getConsultaId() {
+        return consultaId;
     }
 
-    public void setConsulta(List<Consulta> consulta) {
-        this.consulta = consulta;
+    public void setConsultaId(long consultaId) {
+        this.consultaId = consultaId;
     }
 }

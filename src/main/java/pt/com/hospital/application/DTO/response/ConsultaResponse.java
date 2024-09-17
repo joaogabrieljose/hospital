@@ -1,29 +1,25 @@
 package pt.com.hospital.application.DTO.response;
 
-import pt.com.hospital.domain.entity.Medico;
-import pt.com.hospital.domain.entity.Paciente;
-
 import java.time.LocalDateTime;
 
 public class ConsultaResponse {
     public Long id;
-    public Paciente paciente;
-    public Medico medico;
-    public LocalDateTime dataHora;
-    public String motivoConsulta;
+    public long pacienteId;
+    public long medicoId;
     public String status;
+    public LocalDateTime dataHora;
     public LocalDateTime dataCadastro;
 
     public ConsultaResponse(){}
 
-    public ConsultaResponse(Long id, Paciente paciente, Medico medico, LocalDateTime dataHora,
-                           String motivoConsulta, String status, LocalDateTime dataCadastro) {
+
+    public ConsultaResponse(Long id, long pacienteId, long medicoId, String status, LocalDateTime
+            dataHora, LocalDateTime dataCadastro) {
         this.id = id;
-        this.paciente = paciente;
-        this.medico = medico;
-        this.dataHora = dataHora;
-        this.motivoConsulta = motivoConsulta;
+        this.pacienteId = pacienteId;
+        this.medicoId = medicoId;
         this.status = status;
+        this.dataHora = dataHora;
         this.dataCadastro = dataCadastro;
     }
 
@@ -35,36 +31,20 @@ public class ConsultaResponse {
         this.id = id;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public long  getPacienteId() {
+        return pacienteId;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacienteId(long pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
-    public Medico getMedico() {
-        return medico;
+    public long getMedicoId() {
+        return medicoId;
     }
 
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public String getMotivoConsulta() {
-        return motivoConsulta;
-    }
-
-    public void setMotivoConsulta(String motivoConsulta) {
-        this.motivoConsulta = motivoConsulta;
+    public void setMedicoId(long medicoId) {
+        this.medicoId = medicoId;
     }
 
     public String getStatus() {
@@ -73,6 +53,14 @@ public class ConsultaResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public LocalDateTime getDataCadastro() {

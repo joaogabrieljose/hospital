@@ -3,6 +3,9 @@ package pt.com.hospital.domain.Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pt.com.hospital.application.DTO.mapper.PacienteMapper;
+import pt.com.hospital.application.DTO.request.PacienteRequest;
+import pt.com.hospital.application.DTO.response.PacienteResponse;
 import pt.com.hospital.domain.entity.Paciente;
 import pt.com.hospital.domain.repository.PacienteRepository;
 
@@ -15,13 +18,18 @@ public class PacienteService {
     private PacienteRepository repository;
 
     //create paciente
-    public Paciente createPaciente(Paciente paciente) {
-        return repository.save(paciente);
+    public PacienteResponse createPaciente(PacienteRequest request) {
+        var paciente = PacienteMapper.toPaciente(request);
+        var create = repository.save(paciente);
+        return PacienteMapper.toPacienteResponse(create);
     }
 
     // lista paciente
-    public List<Paciente> findAll() {
-        return (List<Paciente>) repository.findAll();
+    public List<PacienteResponse> findAll() {
+        List<Paciente> paciente = (List<Paciente>) repository.findAll();
+        List<PacienteResponse> findPaciente = paciente.stream()
+                .map(PacienteMapper::toPacienteResponse).toList();
+        return findPaciente;
     }
 
     // salva paciente por id
