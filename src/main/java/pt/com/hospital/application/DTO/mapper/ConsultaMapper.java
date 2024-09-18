@@ -21,6 +21,8 @@ public class ConsultaMapper {
 
         consulta.setDataHora(request.getDataHora());
         consulta.setDataCadastro(request.getDataCadastro());
+        consulta.setMotivoConsulta(request.getMotivoConsulta());
+        consulta.setStatus(request.getStatus());
 
         return consulta;
     }
@@ -35,6 +37,7 @@ public class ConsultaMapper {
         consultaResponse.setDataHora(consulta.getDataHora());
         consultaResponse.setStatus(consulta.getStatus());
         consultaResponse.setDataCadastro(consulta.getDataCadastro());
+        consultaResponse.setMotivoConsulta(consulta.getMotivoConsulta());
 
         return consultaResponse;
     }

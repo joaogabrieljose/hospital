@@ -3,10 +3,14 @@ package pt.com.hospital.domain.Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pt.com.hospital.application.DTO.mapper.MedicoMapper;
+import pt.com.hospital.application.DTO.request.MedicoRequest;
+import pt.com.hospital.application.DTO.response.MedicoResponse;
 import pt.com.hospital.domain.entity.Medico;
 import pt.com.hospital.domain.repository.MedicoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicoService {
@@ -15,20 +19,29 @@ public class MedicoService {
     private MedicoRepository repository;
 
     //cria medico
-    public Medico create (Medico medico){
-
-        return repository.save(medico);
+    public MedicoResponse create (MedicoRequest request){
+        var medico = MedicoMapper.toMedico(request);
+        var create = repository.save(medico);
+        return MedicoMapper.toMedicoResponse(create);
     }
 
-    public Medico getMedicoById(long id){
-        return repository.findMedicoById(id).orElseThrow(()-> new RuntimeException("medico não encontrado"));
+    public MedicoResponse getMedicoById(long id){
+        Optional<Medico> medico = repository.findMedicoById(id);
+        Medico get = medico.orElseThrow(()-> new RuntimeException("medico não encontrado"));
+        return MedicoMapper.toMedicoResponse(get);
     }
 
-    public List<Medico> findAll(){
-        return  (List<Medico>) repository.findAll();
+    public List<MedicoResponse> findAll(){
+        List<Medico> medico  = (List<Medico>) repository.findAll();
+        List<MedicoResponse> findMedico = medico.stream()
+                .map(MedicoMapper::toMedicoResponse).toList();
+
+        return  findMedico;
     }
 
-    public Medico update(long id, Medico medicoAtualizado) {
+    public MedicoResponse updateMedico(long id, MedicoRequest medicoAtualizado) {
+        Optional<Medico> medico = repository.findMedicoById(id);
+
         Medico medicoExistente = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Médico não encontrado com id: " + id));
 
@@ -38,12 +51,17 @@ public class MedicoService {
         medicoExistente.setEmail(medicoAtualizado.getEmail());
         medicoExistente.setEndereco(medicoAtualizado.getEndereco());
         medicoExistente.setDataCadastro(medicoAtualizado.getDataCadastro());
-        return repository.save(medicoExistente);
+
+        Medico update = repository.save(medicoExistente);
+        return MedicoMapper.toMedicoResponse(update);
     }
 
-    public void deleteMedicoById(long id){
-        Medico medico = getMedicoById(id);
-        repository.delete(medico);
+    public boolean deleteMedicoById(long id){
+      Optional<Medico> medico = repository.findMedicoById(id);
+      if (medico.isPresent()){
+          repository.deleteById(id);
+          return  true;
+      }
+      return false;
     }
-
 }

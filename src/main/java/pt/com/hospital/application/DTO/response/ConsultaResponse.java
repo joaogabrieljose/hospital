@@ -9,18 +9,20 @@ public class ConsultaResponse {
     public String status;
     public LocalDateTime dataHora;
     public LocalDateTime dataCadastro;
+    private String motivoConsulta;
 
     public ConsultaResponse(){}
 
 
-    public ConsultaResponse(Long id, long pacienteId, long medicoId, String status, LocalDateTime
-            dataHora, LocalDateTime dataCadastro) {
+    public ConsultaResponse(Long id, long pacienteId, long medicoId, String status, LocalDateTime dataHora,
+                            LocalDateTime dataCadastro, String motivoConsulta) {
         this.id = id;
         this.pacienteId = pacienteId;
         this.medicoId = medicoId;
         this.status = status;
         this.dataHora = dataHora;
         this.dataCadastro = dataCadastro;
+        this.motivoConsulta = motivoConsulta;
     }
 
     public Long getId() {
@@ -69,5 +71,13 @@ public class ConsultaResponse {
 
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public String getMotivoConsulta() {
+        return motivoConsulta;
+    }
+
+    public void setMotivoConsulta(String motivoConsulta) {
+        this.motivoConsulta = motivoConsulta;
     }
 }
